@@ -18,3 +18,5 @@ Imports:
     RefManageR,
     purrr,
     glue
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.0
