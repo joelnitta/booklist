@@ -14,7 +14,7 @@ initiate_booklist(sheet_name, groupID, api_key)
 \item{api_key}{API key needed to access Zotero group}
 }
 \value{
-A \code{\link[googlesheet]{googlesheets}} object; a google sheet
+A \code{\link[googlesheets]{googlesheets}} object; a google sheet
 will be created using data from Zotero, and new columns for purchase and
 loan status will be added.
 }
