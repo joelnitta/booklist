@@ -17,6 +17,7 @@ Imports:
     googlesheets,
     RefManageR,
     purrr,
-    glue
+    glue,
+    stringr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0

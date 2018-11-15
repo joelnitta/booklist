@@ -58,7 +58,7 @@ get_zotero <- function (groupID, api_key) {
                          )) %>%
     as.data.frame %>%
     dplyr::as_tibble() %>%
-    dplyr::mutate_all(~str_remove_all(., "\\{|\\}")) %>%
+    dplyr::mutate_all(~stringr::str_remove_all(., "\\{|\\}")) %>%
     dplyr::select(title, author, year, publisher, edition, isbn)
 }
 
@@ -125,7 +125,7 @@ update_booklist <- function (groupID, api_key, sheet_name) {
   check_isbn(zotero_data, "Zotero")
 
   # Get book status data (whether purchased or checked out) from googlesheets
-  book_status <- load_gs_data("booklist") %>%
+  book_status <- load_gs_data(sheet_name) %>%
     dplyr::select(isbn, contains("purchased"), contains("checked_out"))
 
   # Make sure ISBNs are unique in google data
