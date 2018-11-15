@@ -1,11 +1,20 @@
 Package: booklist
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Manage a List of Books
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person(c("Joel", "H."), "Nitta", email = "joelnitta@gmail.com", role = c("aut", "cre"),
+  comment = c(ORCID = "0000-0003-4719-7472"))
+Maintainer: Joel H. Nitta <joelnitta@gmail.com>
+Description: Synchronizes Zotero and Google Sheets to easily maintain a list of books.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    magrittr,
+    googledrive,
+    dplyr,
+    assertthat,
+    googlesheets,
+    RefManageR,
+    purrr,
+    glue
