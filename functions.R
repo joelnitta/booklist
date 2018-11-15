@@ -1,17 +1,28 @@
 #' Create a google sheet with data imported from Zotero
 #'
-#' Google drive allows for files of the same name to exist in the same folder.
-#' If the sheet_name already exists, a warning will be issued but it will still
-#' be written. So make sure you aren't using a duplicated sheet name!
+#' The google sheet will be created in the user's google drive root folder.
 #'
-#' @param sheet_name String; name to use for the google sheet
-#' @param groupID String; ID number of Zotero group with bibliography
-#' @param api_key String; API key needed to access Zotero group
+#' @param sheet_name Name to use for the google sheet
+#' @param groupID ID number of Zotero group with bibliography
+#' @param api_key API key needed to access Zotero group
 #'
-#' @return NULL; a google sheet will be created with the bibliography from
-#' Zotero and new columns for purchase and loan status
+#' @return A \code{\link[googlesheet]{googlesheets}} object; a google sheet 
+#' will be created using data from Zotero, and new columns for purchase and 
+#' loan status will be added.
 #' @export
 initiate_booklist <- function (sheet_name, groupID, api_key) {
+  
+  # Check if any files in drive root folder are already present with same name
+  # as sheet_name
+  already_in_drive <- googledrive::drive_find(
+    pattern = sheet_name,
+    q = "'root' in parents") %>%
+    dplyr::pull(name)
+  
+  assertthat::assert_that(
+    !any(sheet_name %in% already_in_drive),
+    msg = "A sheet with the same name already exists in your google drive root folder")
+  
   get_zotero(groupID = groupID, api_key = api_key) %>%
     dplyr::mutate(purchased = "",
            date_purchased = "",
@@ -21,13 +32,18 @@ initiate_booklist <- function (sheet_name, groupID, api_key) {
     googlesheets::gs_new(sheet_name, input = ., trim = TRUE)
 }
 
-#' get_zotero
+#' Import data from Zotero
 #'
 #' Download a bibliography from a Zotero group 
-#' and convert it to a tibble (tidy dataframe)
+#' and convert it to a tibble (tidy dataframe).
 #'
-#' Groups are located at URLs e.g.,
+#' To find the groupID of your private Zotero group, look at its URL. 
+#' The groupID is the part just before the group name. For example, 
+#' the groupID of 
+#' 
 #' https://www.zotero.org/groups/2220437/mygroup_01/
+#'
+#' is 2220437.
 #'
 #' @param groupID Zotero groupID (not group name); 
 #' precedes group name in group URL
@@ -46,13 +62,11 @@ get_zotero <- function (groupID, api_key) {
     dplyr::select(title, author, year, publisher, edition, isbn)
 }
 
-#' load_gs_data
-#' 
-#' Load a sheet from a google docs table as a dataframe
+#' Load a google sheet as a dataframe
 #' 
 #' From https://shiny.rstudio.com/articles/persistent-data-storage.html
 #'
-#' @param table Name of google docs table
+#' @param table Name of google sheet
 #'
 #' @return dataframe
 #' @export
@@ -89,11 +103,14 @@ check_isbn <- function(data, data_source = c("Google", "Zotero")) {
 }
 
 
-#' Syncronize a Zotero bibliography and a Google Sheet
+#' Synchronize a Zotero bibliography and a Google Sheet
+#' 
+#' It is assumed that the google sheet is located in the root folder of the
+#' user's Google Drive.
 #'
-#' @param groupID String; ID number of Zotero group with bibliography
-#' @param api_key String; API key needed to access Zotero group
-#' @param sheet_name String; name to use for the google sheet
+#' @param groupID ID number of Zotero group with bibliography
+#' @param api_key API key needed to access Zotero group
+#' @param sheet_name Name of the google sheet
 #'
 #' @return NULL; the google sheet should be updated with new book entries from Zotero, if any.
 #' @export
