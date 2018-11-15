@@ -88,6 +88,13 @@ load_gs_data <- function(table) {
 #' @return TRUE if there are no duplicate ISBN numbers or an error stating
 #' which ISBN numbers are duplicates.
 check_isbn <- function(data, data_source = c("Google", "Zotero")) {
+
+  assertthat::assert_that(!any(is.na(data$isbn)),
+                          msg = "One or more ISBNs are missing")
+
+  assertthat::assert_that(!any(data$isbn == ""),
+                          msg = "One or more ISBNs are missing")
+
   dup_isbn <-
     data %>%
     dplyr::count(isbn) %>%
