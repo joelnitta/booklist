@@ -1,14 +1,14 @@
 # booklist
 
-The purpose of this _R_ project is to facilitate maintenance of a database of books, such as those used for courses within a university department.
+The purpose of this __R__ project is to facilitate maintenance of a database of books, such as those used for courses within a university department.
 
 Our scenario is that several people need to enter data for purchasing books (ISBN, title, author, etc), and also keep track of who purchased which book when, and who has the book in their possession (who has "checked-out" the book).
 
 There are obviously many more advanced was to construct such a database, but here we will use make use of two pre-existing solutions with some convenient features: [Zotero](https://www.zotero.org/) and [Google Sheets](https://www.google.com/sheets/about/).
 
-_Zotero_ is a bibliography manager. We will leverage its "Groups" feature, which allows for collaborative editing of bibliographies by members of a group. This way, any of the users who need to purchase books can edit a single list. Another useful feature of Zotero is its [browser plugin](https://www.zotero.org/download/). This can detect bibliographic information (such as on an Amazon product page), and import it directly to the database with a single click. This makes it extremely easy and error-free to import book titles and ISBNs for purchasing.
+__Zotero__ is a bibliography manager. We will leverage its "Groups" feature, which allows for collaborative editing of bibliographies by members of a group. This way, any of the users who need to purchase books can edit a single list. Another useful feature of Zotero is its [browser plugin](https://www.zotero.org/download/). This can detect bibliographic information (such as on an Amazon product page), and import it directly to the database with a single click. This makes it extremely easy and error-free to import book titles and ISBNs for purchasing.
 
-_Google Sheets_ is a cloud-based spreadsheet editor, so it is convenient for multiple users to edit the same document. We will also make use of its data-validation and versioning features.
+__Google Sheets__ is a cloud-based spreadsheet editor, so it is convenient for multiple users to edit the same document. We will also make use of its data-validation and versioning features.
 
 `booklist` connects Zotero and Google Sheets so book data can be easily entered and maintained.
 
@@ -53,13 +53,13 @@ This is the `groupID` number that will be used by the `booklist` code.
 Go to [this page](https://www.zotero.org/settings/keys/new) to create a new private key.
 
 - Enter a description for the key
-- Check the "Allow library access" box under _Personal Library_
-- Select "None" for "All Groups" under _Default Group Permissions_
+- Check the "Allow library access" box under __Personal Library__
+- Select "None" for "All Groups" under __Default Group Permissions__
 - Check the "Per Group Permissions" box
 - After checking the "Per Group Permissions" box, select "Read/Write" under the name of the private group you created above (if there are other groups, select "none" for their permissions for this key).
 - Press "Save Key"
 
-In the next window that opens, a long series of numbers and characters will appear under "Key Created". _COPY_ this somewhere secure because you won't have access to it again after the window closes. 
+In the next window that opens, a long series of numbers and characters will appear under "Key Created". __COPY__ this somewhere secure because you won't have access to it again after the window closes. 
 
 This is the `api_key` that will be used by the `booklist` code.
 
