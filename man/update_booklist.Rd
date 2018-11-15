@@ -14,7 +14,8 @@ update_booklist(groupID, api_key, sheet_name)
 \item{sheet_name}{Name of the google sheet}
 }
 \value{
-NULL; the google sheet should be updated with new book entries from Zotero, if any.
+A \code{\link[googlesheets]{googlesheets}} object;
+the google sheet should be updated with new book entries from Zotero, if any.
 }
 \description{
 It is assumed that the google sheet is located in the root folder of the

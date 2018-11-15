@@ -112,7 +112,8 @@ check_isbn <- function(data, data_source = c("Google", "Zotero")) {
 #' @param api_key API key needed to access Zotero group
 #' @param sheet_name Name of the google sheet
 #'
-#' @return NULL; the google sheet should be updated with new book entries from Zotero, if any.
+#' @return A \code{\link[googlesheets]{googlesheets}} object;
+#' the google sheet should be updated with new book entries from Zotero, if any.
 #' @export
 update_booklist <- function (groupID, api_key, sheet_name) {
 
