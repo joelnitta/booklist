@@ -23,7 +23,15 @@ initiate_booklist <- function (sheet_name, groupID, api_key) {
     !any(sheet_name %in% already_in_drive),
     msg = "A sheet with the same name already exists in your google drive root folder")
 
-  get_zotero(groupID = groupID, api_key = api_key) %>%
+  # Load Zotero data
+  zotero_data <- get_zotero(groupID = groupID, api_key = api_key)
+
+  # Make sure ISBNs are unique in Zotero data
+  check_isbn(zotero_data, "Zotero")
+
+  # Write new google sheet based on Zotero data
+  # Convert NAs to blanks for google sheets
+  zotero_data %>%
     dplyr::mutate(purchased = "",
            date_purchased = "",
            checked_out = "",
