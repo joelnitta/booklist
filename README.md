@@ -34,7 +34,6 @@ Next, initialize the google sheet to manage the booklist using your google drive
 `googlesheets` will also take care of authentication the first time.
 
 ``` r
-library(tidyverse)
 library(booklist)
 
 initiate_booklist(groupID = "YOUR_ZOTERO_GROUPID",
